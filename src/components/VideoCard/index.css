@@ -1,0 +1,11 @@
+.card__container {
+  display: flex;
+  min-height: 15rem;
+  max-width: 22rem;
+  margin-top: 2em;
+}
+.card > img {
+  object-fit: cover;
+  min-height: 12rem;
+  max-width: 100%;
+}
