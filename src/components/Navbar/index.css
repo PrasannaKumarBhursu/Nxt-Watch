@@ -1,0 +1,17 @@
+.navbar__container {
+  min-height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__icon {
+  min-height: 0vw;
+  font-size: clamp(1.5rem, 1vw, 2.5rem);
+}
