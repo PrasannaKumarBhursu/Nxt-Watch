@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import ThemeContext from "../ThemeContext";
 import "./index.css";
 
-const App = () => {
+const Navbar = () => {
   return (
     <ThemeContext.Consumer>
       {(value) => {
@@ -96,4 +96,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Navbar;

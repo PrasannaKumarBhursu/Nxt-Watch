@@ -6,9 +6,11 @@ import {
 } from "react-router-dom";
 
 import LoginRoute from "./components/LoginRoute";
-import HomeRoute from "./components/HomeRoute";
 import ThemeContext from "./components/ThemeContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Trend from "./components/Trend";
+import Home from "./components/Home";
+import Game from "./components/Game";
 
 export class App extends Component {
   state = {
@@ -40,7 +42,9 @@ export class App extends Component {
             }}
           >
             <Route exact path="/login" component={LoginRoute} />
-            <ProtectedRoute exact path="/" component={HomeRoute} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute exact path="/trend" component={Trend} />
+            <ProtectedRoute exact path="/game" component={Game} />
           </ThemeContext.Provider>
         </Routes>
       </Router>

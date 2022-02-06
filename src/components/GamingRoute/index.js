@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import SearchIcon from "@mui/icons-material/Search";
 import Cookies from "js-cookie";
-import VideoCard from "../VideoCard";
 import { TailSpin } from "react-loader-spinner";
+import GameCard from "../GameCard";
 import "./index.css";
-
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 const apiStatusConstants = {
   initial: "INITIAL",
   success: "SUCCESS",
@@ -13,10 +11,8 @@ const apiStatusConstants = {
   inProgress: "IN_PROGRESS",
 };
 
-export default class HomeRoute extends Component {
+export default class Gaming extends Component {
   state = {
-    showBanner: true,
-    searchValue: " ",
     youtubeVideos: [],
     apiStatus: apiStatusConstants.initial,
   };
@@ -33,10 +29,8 @@ export default class HomeRoute extends Component {
   getDetails = async () => {
     this.setState({ apiStatus: apiStatusConstants.inProgress });
     console.log("its clicked");
-    const { searchValue } = this.state;
-    console.log(searchValue);
     const jwtToken = Cookies.get("jwt_token");
-    const url = `https://apis.ccbp.in/videos/all?search=${searchValue}`;
+    const url = "https://apis.ccbp.in/videos/gaming";
     console.log(url);
     const options = {
       headers: {
@@ -58,21 +52,6 @@ export default class HomeRoute extends Component {
     }
   };
 
-  onClickEnter = (e) => {
-    if (e.key === "Enter") {
-      this.getDetails();
-    }
-  };
-
-  removeBanner = () => {
-    this.setState({ showBanner: false });
-  };
-
-  searchValueUpdated = (e) => {
-    const inputValue = e.target.value;
-    this.setState({ searchValue: inputValue });
-  };
-
   retryTheFetchCall = () => {
     this.getDetails();
   };
@@ -91,7 +70,7 @@ export default class HomeRoute extends Component {
         }}
       >
         {youtubeVideos.map((video) => (
-          <VideoCard video={video} key={video.id} />
+          <GameCard video={video} key={video.id} />
         ))}
       </div>
     );
@@ -110,13 +89,17 @@ export default class HomeRoute extends Component {
     <div className="failuer__container d-flex justify-content-center align-items-center">
       <div style={{ width: "22rem" }}>
         <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
           className="w-100 p-3"
+          alt="failure-img"
           style={{ objectFit: "cover" }}
         />
         <div className="text-center p-3 pt-0">
-          <h1>No Search results found</h1>
-          <p>Try different key words or remove search filter</p>
+          <h1>Oops! Something Went Wrong</h1>
+          <p>
+            We are having some trouble to complete your request. Please try
+            again
+          </p>
           <div className="text-center">
             <button
               className="btn btn-primary"
@@ -145,46 +128,11 @@ export default class HomeRoute extends Component {
   };
 
   render() {
-    const { showBanner, searchValue } = this.state;
-
     return (
       <>
-        {showBanner && (
-          <div className="p-4 img__container">
-            <CloseIcon
-              className="d-block"
-              style={{ float: "right", marginBottom: "3rem" }}
-              onClick={() => this.removeBanner()}
-            />
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-              className="mt-3"
-              style={{ maxWidth: "13rem" }}
-              alt="img-banner"
-            />
-            <p className="mt-3">Buy Nxt Watch Premium prepaid plans with UPI</p>
-            <div>
-              <button className="Btn mt-3">GET IT NOW</button>
-            </div>
-          </div>
-        )}
-        <div className="pl-4 pr-4 searchbar__container mt-2">
-          <input
-            type="search"
-            className="search__input p-2 form-control text-primary"
-            placeholder="Search"
-            onChange={this.searchValueUpdated}
-            value={searchValue}
-            onKeyDown={this.onClickEnter}
-          />
-          <div>
-            <SearchIcon
-              className="search__icon"
-              style={{ fontSize: "40px", padding: "0.5rem" }}
-              type="submit"
-              onClick={() => this.getDetails()}
-            />
-          </div>
+        <div className="d-flex p-4 align-items-center justify-content-center">
+          <LocalFireDepartmentIcon color="primary" size="large" />
+          <h1 className="ml-4">Gaming</h1>
         </div>
         {this.renderFinalPage()}
       </>
